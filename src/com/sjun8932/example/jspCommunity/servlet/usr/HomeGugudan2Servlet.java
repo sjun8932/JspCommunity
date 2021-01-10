@@ -2,18 +2,15 @@ package com.sjun8932.example.jspCommunity.servlet.usr;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 //@web까지 치고 Ctrl+Space
-@WebServlet("/usr/home/gugudan2")
-public class HomeGugudanServlet extends HttpServlet {
+@WebServlet("/usr/home/gugudan")
+public class HomeGugudan2Servlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,11 +29,11 @@ public class HomeGugudanServlet extends HttpServlet {
 			limit = Integer.parseInt(req.getParameter("limit"));
 		}
 
-		req.setAttribute("dan", dan);
-		req.setAttribute("limit", limit);
-		
-		RequestDispatcher rd = req.getRequestDispatcher("/jsp/usr/home/gugudan2.jsp");
-		rd.forward(req, resp);
-			
+		resp.getWriter().append("<h1>" + String.format("구구단 %d단", dan) + "</h1>");
+
+		for (int i = 1; i <= limit; i++) {
+			resp.getWriter().append("<div>" + String.format("%d * %d = %d ", dan, i, dan * i) + "</div>");
+		}
 	}
+
 }
